@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">winterdev</string>
+    <string name="ucsd_women_safety">UCSD Women Safety</string>
+    <string name="enter_username">Enter username</string>
+    <string name="create_account"><![CDATA[CREATE ACCOUNT-->]]></string>
+    <string name="don_t_have_an_account">DON\'T HAVE AN ACCOUNT?</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password</string>
+    <string name="username">Username</string>
+    <string name="title_activity_womenaccountsettings">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
