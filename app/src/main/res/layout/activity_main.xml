@@ -81,19 +81,6 @@
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
         tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:backgroundTint="#091761"
-        app:icon="@android:drawable/ic_menu_sort_by_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -103,7 +90,7 @@
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="BottomAppBar"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -113,12 +100,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp"
         android:text="Resouces"
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button11"
-        app:layout_constraintVertical_bias="0.992" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button13"
@@ -141,9 +127,10 @@
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar"
         app:layout_constraintEnd_toEndOf="@+id/bottomAppBar"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.992" />
 
     <Button
         android:id="@+id/button2"
