@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -88,8 +87,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="391dp"
-        android:layout_height="85dp"
+        android:layout_width="381dp"
+        android:layout_height="80dp"
         android:text="This app was developed by Mrinal Sharma, Sarayu Pai, Jennifer Jiang and Karina Sanchez. "
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/button4"
@@ -101,15 +100,27 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="395dp"
-        android:layout_height="149dp"
+        android:layout_width="384dp"
+        android:layout_height="148dp"
         android:text="We are a group of students part of the WIC club at UCSD with the goal of creating a safer learning environment for all at UCSD. Although this app may seem intended for women at UCSD, we believe all students could benefit from using this app."
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.305" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="319dp"
+        android:layout_height="292dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756"
+        app:srcCompat="@drawable/triton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
