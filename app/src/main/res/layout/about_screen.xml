@@ -54,6 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        android:gravity="center"
         tools:ignore="BottomAppBar"
         tools:layout_editor_absoluteX="-47dp" />
 
@@ -67,9 +68,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="About"
         app:titleMarginStart="175dp"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="About"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
@@ -120,7 +132,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.756"
+        app:layout_constraintVertical_bias="0.808"
         app:srcCompat="@drawable/triton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

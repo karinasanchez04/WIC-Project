@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">My Application2</string>
+    <string name="app_name">UCSD Women Safety</string>
+    <string name="linkToCare">
+        <a href="https://care.ucsd.edu/">https://care.ucsd.edu/</a>
+    </string>
+    <string name="linkToCaps">
+        <a href="https://caps.ucsd.edu/">https://caps.ucsd.edu/</a>
+    </string>
 </resources>

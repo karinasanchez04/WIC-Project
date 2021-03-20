@@ -42,9 +42,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="Settings"
-        app:titleMarginStart="175dp"
+        app:titleMarginStart="140dp"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:layout_editor_absoluteX="0dp"
+
+    />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
@@ -52,10 +65,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"
+        android:gravity="center"
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar5"
         app:layout_constraintVertical_bias="1.0" />
@@ -68,7 +82,7 @@
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar5"
         app:layout_constraintVertical_bias="1.0" />
@@ -81,7 +95,7 @@
         app:backgroundTint="#091761"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar5"
         app:layout_constraintVertical_bias="1.0" />
