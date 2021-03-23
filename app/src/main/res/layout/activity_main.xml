@@ -9,6 +9,7 @@
     android:rotationY="0"
     tools:context=".MainActivity">
 
+<!--    fake phone call button-->
     <Button
         android:id="@+id/button8"
         android:layout_width="180dp"
@@ -23,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.596" />
 
+    <!--    record button-->
     <Button
         android:id="@+id/button7"
         android:layout_width="180dp"
@@ -37,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.742" />
 
+    <!--    siren button-->
     <Button
         android:id="@+id/button6"
         android:layout_width="180dp"
@@ -51,6 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.742" />
 
+    <!--   share location button-->
     <Button
         android:id="@+id/button"
         android:layout_width="180dp"
@@ -66,6 +70,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.595" />
 
+    <!--    top tool bar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -81,6 +86,7 @@
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
         tools:layout_editor_absoluteX="0dp" />
 
+    <!-- bottom tool bar -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -94,6 +100,7 @@
         tools:ignore="BottomAppBar"
         tools:layout_editor_absoluteX="0dp" />
 
+    <!--  resources bottom button-->
     <Button
         android:id="@+id/button12"
         android:layout_width="wrap_content"
@@ -106,6 +113,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--  settings bottom button-->
     <Button
         android:id="@+id/button13"
         android:layout_width="wrap_content"
@@ -119,6 +127,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.993" />
 
+    <!--  About bottom button-->
     <Button
         android:id="@+id/button14"
         android:layout_width="wrap_content"
@@ -132,6 +141,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.994" />
 
+    <!--  911 button-->
     <Button
         android:id="@+id/button2"
         android:layout_width="208dp"
