@@ -3,6 +3,7 @@ package com.example.myapplication2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button resourcesBtn;
     private Button settingsBtn;
     private Button aboutBtn;
+    private Button emergencyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
         aboutBtn = (Button) findViewById(R.id.button14);
         aboutBtn.setOnClickListener(v -> openAboutActivity()) ;
+
+        emergencyBtn = (Button) findViewById(R.id.button2);
+        emergencyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:911"));
+                startActivity(intent);
+
+            }
+        });
 
 
     }
