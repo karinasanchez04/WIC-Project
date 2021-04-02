@@ -9,7 +9,7 @@
     android:rotationY="0"
     tools:context=".MainActivity">
 
-<!--    fake phone call button-->
+    <!--    fake phone call button-->
     <Button
         android:id="@+id/button8"
         android:layout_width="180dp"
