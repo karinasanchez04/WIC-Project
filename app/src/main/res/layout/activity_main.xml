@@ -26,10 +26,10 @@
 
     <!--    record button-->
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/record"
         android:layout_width="180dp"
         android:layout_height="87dp"
-        android:text="Record Livestream"
+        android:text="Record"
         app:backgroundTint="#091761"
         app:icon="@android:drawable/ic_media_play"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +40,20 @@
         app:layout_constraintVertical_bias="0.742" />
 
     <!--    siren button-->
+    <Button
+        android:id="@+id/livestream"
+        android:layout_width="180dp"
+        android:layout_height="87dp"
+        android:text="Livestream"
+        app:backgroundTint="#091761"
+        app:icon="@android:drawable/ic_media_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
     <Button
         android:id="@+id/button6"
         android:layout_width="180dp"
@@ -55,6 +69,20 @@
         app:layout_constraintVertical_bias="0.742" />
 
     <!--   share location button-->
+    <Button
+        android:id="@+id/safespots"
+        android:layout_width="180dp"
+        android:layout_height="87dp"
+        android:text="Safe Spots Near You"
+        app:backgroundTint="#091761"
+        app:icon="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="180dp"
