@@ -1,15 +1,39 @@
 package com.example.myapplication2;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ComponentActivity;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,6 +69,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final MediaPlayer fakecallAudioMP = MediaPlayer.create(this, R.raw.fakecallsound);
+
+        Button FakeCall = (Button) this.<View>findViewById(R.id.button8);
+
+        FakeCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fakecallAudioMP.start();
+            }
+        });
+
+        final MediaPlayer sirenAudioMP = MediaPlayer.create(this, R.raw.policesiren);
+
+        Button Siren = (Button) this.<View>findViewById(R.id.button6);
+
+        Siren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sirenAudioMP.start();
+            }
+        });
+
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        Log.d("tag", "onCreate: "+firebaseAuth.getCurrentUser().getEmail()+firebaseAuth.getCurrentUser().getDisplayName());
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 
@@ -162,4 +212,23 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(mobileLiveIntent);
     }
+
+    public void logout(final View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+                .signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                startActivity(new Intent(view.getContext(),Login.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this,"Signout Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+
+

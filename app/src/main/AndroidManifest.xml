@@ -4,14 +4,15 @@
 
     <queries>
         <package android:name="com.google.android.youtube" />
+
         <intent>
             <action android:name="android.intent.action.CREATE_LIVE_STREAM" />
         </intent>
     </queries>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication2">
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".LoadingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +38,7 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".ResourcesActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
