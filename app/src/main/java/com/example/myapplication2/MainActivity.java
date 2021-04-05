@@ -19,6 +19,7 @@ import android.text.TextUtils;
 import android.provider.MediaStore;
 import android.widget.VideoView;
 import android.widget.Toast;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsBtn;
     private Button aboutBtn;
     private Button emergencyBtn;
+    //variable to start youtube livestream
+    private Button startLive;
 
     public static final String FIRST_NAME = "FIRST CONTACT NAME";
     public static final String SECOND_NAME = "SECOND CONTACT NAME";
@@ -36,10 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private String firstContactNum;
     private String secondContactName;
     private String secondContactNum;
-
-
-    //Variable to start youtube livestream
-    private Button startLive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +75,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //adding on click listener to record button
         findViewById(R.id.record).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 startActivityForResult(intent, 1);
-
             }
         });
 
@@ -97,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void openSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
