@@ -1,49 +1,48 @@
 package com.example.myapplication2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ComponentActivity;
-
-import android.media.MediaPlayer;
-import android.os.Bundle;
-
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
+import android.provider.MediaStore;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.app.AlertDialog;
-import android.content.pm.PackageManager;
-import android.text.TextUtils;
-import android.provider.MediaStore;
-import android.widget.VideoView;
 import android.widget.Toast;
+import android.widget.VideoView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private Button resourcesBtn;
@@ -64,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
     //Variable to start youtube livestream
     private Button startLive;
+
+    // location sharing
+    private Button locationButton;
+    private TextView locationText;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    Dialog dialog;
+    // dialog text
+    TextView dialogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +150,57 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //calls method to check if device can support youtube livestreaming
                 validateMobileLiveIntent(MainActivity.this);
+            }
+        });
+
+        // location sharing
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        locationButton = findViewById(R.id.location_button);
+        locationText = findViewById(R.id.location_text);
+
+        // initialize dialog
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.location_dialog);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        // set up dialog buttons
+        Button buttonShare = dialog.findViewById(R.id.button_share);
+        Button buttonCancel = dialog.findViewById(R.id.button_cancel);
+
+        // dialog textView
+        dialogText = dialog.findViewById(R.id.textView_details);
+
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // share location with specified contacts in user settings
+                dialog.dismiss();
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // check permissions
+                if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    //dialog.show();
+                    getLocation();
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                }
             }
         });
 
@@ -226,6 +284,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MainActivity.this,"Signout Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getLocation() {
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location != null) {
+                    try {
+                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),
+                                location.getLongitude(), 1);
+                        // set latitude and longitude on textview
+                        //locationText.setText("location found");
+                        Double latitude = addresses.get(0).getLatitude();
+                        Double longitude = addresses.get(0).getLongitude();
+
+                        dialogText.setText(Html.fromHtml(
+                                "<font color='#6200EE><b>Latitude: </b></font>" + latitude
+                                        + "<font color='#6200EE><b>Longitude: </b></font>" + longitude
+                                        + "<font color='#6200EE><b>Address: </b></font>"
+                                        + addresses.get(0).getAddressLine(0)));
+                        dialog.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
