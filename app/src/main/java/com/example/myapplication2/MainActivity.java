@@ -49,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsBtn;
     private Button aboutBtn;
     private Button emergencyBtn;
+    //variable to start youtube livestream
+    private Button startLive;
+    // location sharing
+    private Button locationButton;
+    private TextView locationText;
 
     public static final String FIRST_NAME = "FIRST CONTACT NAME";
     public static final String SECOND_NAME = "SECOND CONTACT NAME";
@@ -60,18 +65,11 @@ public class MainActivity extends AppCompatActivity {
     private String secondContactName;
     private String secondContactNum;
 
-
-    //Variable to start youtube livestream
-    private Button startLive;
-
-    // location sharing
-    private Button locationButton;
-    private TextView locationText;
     private FusedLocationProviderClient fusedLocationProviderClient;
     Dialog dialog;
     // dialog text
     TextView dialogText;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,13 +131,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //adding on click listener to record button
         findViewById(R.id.record).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 startActivityForResult(intent, 1);
-
             }
         });
 
@@ -205,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void openSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
