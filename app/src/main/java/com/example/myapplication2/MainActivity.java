@@ -3,7 +3,9 @@ package com.example.myapplication2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ComponentActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        promptUser();
     }
     public void openSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
@@ -80,5 +82,21 @@ public class MainActivity extends AppCompatActivity {
     public void openAboutActivity(){
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
+    }
+
+    public void promptUser(){
+        if(firstContactNum.isEmpty() && secondContactNum.isEmpty()){
+            new AlertDialog.Builder(this)
+                    .setTitle("Contact Info not set")
+                    .setMessage("Please enter contact information in Settings for Share Location feature to work")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        }
     }
 }

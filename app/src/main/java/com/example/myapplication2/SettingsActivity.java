@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
     private Button resourcesBtn;
@@ -81,8 +87,8 @@ public class SettingsActivity extends AppCompatActivity {
                 firstContactNum = firstContactNumInput.getText().toString();
                 secondContactName = secondContactNameInput.getText().toString();
                 secondContactNum = secondContactNumInput.getText().toString();
-
                 saveData();
+
                 sendData();
 
             }
@@ -95,6 +101,14 @@ public class SettingsActivity extends AppCompatActivity {
     }
     public void saveData(){
 
+        if(!validateNumber1(firstContactNumInput.getText().toString())){
+            firstContactNumInput.setError("Please enter a valid phone number");
+            return;
+        }
+        if(!validateNumber1(secondContactNumInput.getText().toString())){
+            secondContactNumInput.setError("Please enter a valid phone number");
+            return;
+        }
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(NAME, name);
         editor.putString(FIRST_CONT_NAME, firstContactName);
@@ -121,6 +135,8 @@ public class SettingsActivity extends AppCompatActivity {
         firstContactNumInput.setText(firstContactNum_load);
         secondContactNameInput.setText(secondContactName_load);
         secondContactNumInput.setText(secondContactNum_load);
+
+
     }
     public void sendData(){
 
@@ -133,6 +149,21 @@ public class SettingsActivity extends AppCompatActivity {
         i.putExtra(MainActivity.SECOND_NUM, firstContactNum);
 
     }
+
+    private boolean validateNumber1(String input){
+        Pattern p = Pattern.compile("[2-9][0-9]{9}");
+        Matcher m = p.matcher((input));
+        return m.matches();
+
+
+
+
+    }
+
+
+
+
+
     public void openHomeActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
