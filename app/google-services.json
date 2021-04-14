@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64655987885",
+    "project_id": "girlsgetitdone-1ae35",
+    "storage_bucket": "girlsgetitdone-1ae35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64655987885:android:30e0fc6e9aced296526224",
+        "android_client_info": {
+          "package_name": "com.example.myapplication2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64655987885-ebla99ci03teuvp0nvbbqe45nevbpdns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd6MYb3qPXLRxBpAuU67JT96b4TXE_L-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64655987885-ebla99ci03teuvp0nvbbqe45nevbpdns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

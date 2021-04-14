@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.location_dialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
+            //dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
