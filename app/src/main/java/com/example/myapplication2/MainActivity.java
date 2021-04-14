@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
         FakeCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fakecallAudioMP.start();
+                if(fakecallAudioMP.isPlaying()){
+                    fakecallAudioMP.pause();}
+                else{fakecallAudioMP.start();}
             }
         });
 
@@ -95,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
         Siren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sirenAudioMP.start();
+                if(sirenAudioMP.isPlaying()){
+                    sirenAudioMP.pause();}
+                else{ sirenAudioMP.start();}
             }
         });
 
