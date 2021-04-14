@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         aboutBtn = (Button) findViewById(R.id.button14);
         aboutBtn.setOnClickListener(v -> openAboutActivity());
-
+        promptUser();
         //emergencyBtn functionality
         emergencyBtn = (Button) findViewById(R.id.button2);
         emergencyBtn.setOnClickListener(new View.OnClickListener() {
@@ -349,6 +350,24 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to send message.", Toast.LENGTH_SHORT).show();
         }
     }
+    public void promptUser(){
+        if(firstContactNum.isEmpty() && secondContactNum.isEmpty()){
+            new AlertDialog.Builder(this)
+                    .setTitle("Contact Info not set")
+                    .setMessage("Please enter contact information in Settings for Share Location feature to work")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        }
+    }
+
+
 }
 
 

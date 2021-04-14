@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(getApplicationContext(), "your google account is connected to our application", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),LoadingScreen.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
