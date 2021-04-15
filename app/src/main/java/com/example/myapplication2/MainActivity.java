@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     // location sharing
     private Button locationButton;
     private TextView locationText;
+    private Button mapButton;
 
     public static final String FIRST_NAME = "FIRST CONTACT NAME";
     public static final String SECOND_NAME = "SECOND CONTACT NAME";
@@ -69,11 +70,20 @@ public class MainActivity extends AppCompatActivity {
     Dialog dialog;
     // dialog text
     TextView dialogText;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Opens map screen when safespots button is clicked
+        mapButton = (Button) findViewById(R.id.safespots);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMapActivity();
+            }
+        });
 
         final MediaPlayer fakecallAudioMP = MediaPlayer.create(this, R.raw.fakecallsound);
 
@@ -314,6 +324,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void openMapActivity() {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 }
 
