@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Girls on the Go</string>
+    <string name="map_key" translatable="false">AIzaSyBcvdwWkFDCzFY_gvve2l3vXF5xtjArLCc</string>
     <string name="linkToCare">
         <a href="https://care.ucsd.edu/">https://care.ucsd.edu/</a>
     </string>
     <string name="linkToCaps">
         <a href="https://caps.ucsd.edu/">https://caps.ucsd.edu/</a>
     </string>
-    <string name="map_key" translatable="false">AIzaSyB06CgCjWfKB2x--2e4bN9oZlZixr_zF6Y</string>
 </resources>

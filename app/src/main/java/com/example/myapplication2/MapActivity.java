@@ -20,7 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback /*extends AppCompatActivity */{
+
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -58,10 +59,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I am here!");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+        LatLng curr = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions().position(curr).title("I am here!");
+        LatLng ucsd = new LatLng(32.8801, -117.2340);
+        googleMap.addMarker(new MarkerOptions().position(ucsd).title("UCSD"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ucsd));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(curr));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curr, 5));
         googleMap.addMarker(markerOptions);
     }
 
