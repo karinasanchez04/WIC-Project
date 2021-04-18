@@ -56,11 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private Button startLive;
     // location sharing
     private Button locationButton;
-<<<<<<< HEAD
-    private TextView locationText;
     private Button mapButton;
-=======
->>>>>>> master
+    private TextView locationText;
 
     public static final String FIRST_NAME = "FIRST CONTACT NAME";
     public static final String SECOND_NAME = "SECOND CONTACT NAME";
@@ -353,12 +350,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-    public void openMapActivity() {
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
-    }
-=======
     private void sendSMS() {
         try {
             SmsManager smsManager = SmsManager.getDefault();
@@ -387,8 +378,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void openMapActivity() {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+    }
 
->>>>>>> master
 }
 
 
