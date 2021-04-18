@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                         sendSMS();
+                        dialog.dismiss();
                     } else {
                         requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1);
                     }
