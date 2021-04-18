@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("868570645317-vksmpp713s11rurbevqvg2ui9lq2vnei.apps.googleusercontent.com")
+                .requestIdToken("64655987885-ebla99ci03teuvp0nvbbqe45nevbpdns.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(getApplicationContext(), "your google account is connected to our application", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),LoadingScreen.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,6 +16,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Telephony;
+import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private Button startLive;
     // location sharing
     private Button locationButton;
+<<<<<<< HEAD
     private TextView locationText;
     private Button mapButton;
+=======
+>>>>>>> master
 
     public static final String FIRST_NAME = "FIRST CONTACT NAME";
     public static final String SECOND_NAME = "SECOND CONTACT NAME";
@@ -67,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private String secondContactNum;
 
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private String userLocation;
     Dialog dialog;
     // dialog text
     TextView dialogText;
@@ -92,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
         FakeCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fakecallAudioMP.start();
+                if(fakecallAudioMP.isPlaying()){
+                    fakecallAudioMP.pause();}
+                else{fakecallAudioMP.start();}
             }
         });
 
@@ -103,13 +112,15 @@ public class MainActivity extends AppCompatActivity {
         Siren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sirenAudioMP.start();
+                if(sirenAudioMP.isPlaying()){
+                    sirenAudioMP.pause();}
+                else{ sirenAudioMP.start();}
             }
         });
 
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        Log.d("tag", "onCreate: "+firebaseAuth.getCurrentUser().getEmail()+firebaseAuth.getCurrentUser().getDisplayName());
+        Log.d("tag", "onCreate: " + firebaseAuth.getCurrentUser().getEmail() + firebaseAuth.getCurrentUser().getDisplayName());
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
 
@@ -122,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
 
         //functionality of buttons on toolbar
         resourcesBtn = findViewById(R.id.button12);
-        resourcesBtn.setOnClickListener(v -> openResourcesActivity()) ;
+        resourcesBtn.setOnClickListener(v -> openResourcesActivity());
 
         settingsBtn = (Button) findViewById(R.id.button13);
-        settingsBtn.setOnClickListener(v -> openSettingsActivity()) ;
+        settingsBtn.setOnClickListener(v -> openSettingsActivity());
 
         aboutBtn = (Button) findViewById(R.id.button14);
-        aboutBtn.setOnClickListener(v -> openAboutActivity()) ;
-
+        aboutBtn.setOnClickListener(v -> openAboutActivity());
+        promptUser();
         //emergencyBtn functionality
         emergencyBtn = (Button) findViewById(R.id.button2);
         emergencyBtn.setOnClickListener(new View.OnClickListener() {
@@ -163,13 +174,12 @@ public class MainActivity extends AppCompatActivity {
         // location sharing
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationButton = findViewById(R.id.location_button);
-        locationText = findViewById(R.id.location_text);
 
         // initialize dialog
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.location_dialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
+            //dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
@@ -185,7 +195,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // share location with specified contacts in user settings
-                dialog.dismiss();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                        sendSMS();
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1);
+                    }
+                }
             }
         });
 
@@ -213,17 +229,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openSettingsActivity(){
+    public void openSettingsActivity() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
-    public void openResourcesActivity(){
+    public void openResourcesActivity() {
         Intent intent = new Intent(this, ResourcesActivity.class);
         startActivity(intent);
     }
 
-    public void openAboutActivity(){
+    public void openAboutActivity() {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
@@ -259,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent createMobileLiveIntent(Context context, String description) {
         Intent intent = new Intent("com.google.android.youtube.intent.action.CREATE_LIVE_STREAM").setPackage("com.google.android.youtube");
-        Uri referrer= new Uri.Builder()
+        Uri referrer = new Uri.Builder()
                 .scheme("android-app")
                 .appendPath(context.getPackageName())
                 .build();
@@ -286,17 +302,27 @@ public class MainActivity extends AppCompatActivity {
                 .signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                startActivity(new Intent(view.getContext(),Login.class));
+                startActivity(new Intent(view.getContext(), Login.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MainActivity.this,"Signout Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Signout Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
@@ -307,9 +333,10 @@ public class MainActivity extends AppCompatActivity {
                         List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),
                                 location.getLongitude(), 1);
                         // set latitude and longitude on textview
-                        //locationText.setText("location found");
                         Double latitude = addresses.get(0).getLatitude();
                         Double longitude = addresses.get(0).getLongitude();
+
+                        userLocation = "Latitude: " + latitude + ", Longitude: " + longitude;
 
                         dialogText.setText(Html.fromHtml(
                                 "<font color='#6200EE><b>Latitude: </b></font>" + latitude
@@ -326,10 +353,42 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
     public void openMapActivity() {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
     }
+=======
+    private void sendSMS() {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(firstContactNum, null, userLocation, null, null);
+            smsManager.sendTextMessage(secondContactNum, null, userLocation, null, null);
+            Toast.makeText(this, "Message sent.", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to send message.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void promptUser(){
+        if(firstContactNum.isEmpty() && secondContactNum.isEmpty()){
+            new AlertDialog.Builder(this)
+                    .setTitle("Contact Info not set")
+                    .setMessage("Please enter contact information in Settings for Share Location feature to work")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+
+        }
+    }
+
+
+>>>>>>> master
 }
 
 

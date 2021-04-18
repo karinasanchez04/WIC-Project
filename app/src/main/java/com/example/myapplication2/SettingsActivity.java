@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SettingsActivity extends AppCompatActivity {
     private Button resourcesBtn;
     private Button homeBtn;
@@ -94,7 +97,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
     public void saveData(){
-
+        if(!validateNumber1(firstContactNumInput.getText().toString())){
+            firstContactNumInput.setError("Please enter a valid phone number");
+            return;
+        }
+        if(!validateNumber1(secondContactNumInput.getText().toString())){
+            secondContactNumInput.setError("Please enter a valid phone number");
+            return;
+        }
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(NAME, name);
         editor.putString(FIRST_CONT_NAME, firstContactName);
@@ -131,6 +141,16 @@ public class SettingsActivity extends AppCompatActivity {
         i.putExtra(MainActivity.FIRST_NUM, firstContactNum);
         i.putExtra(MainActivity.SECOND_NAME, secondContactName);
         i.putExtra(MainActivity.SECOND_NUM, firstContactNum);
+
+    }
+
+    private boolean validateNumber1(String input){
+        Pattern p = Pattern.compile("[2-9][0-9]{9}");
+        Matcher m = p.matcher((input));
+        return m.matches();
+
+
+
 
     }
     public void openHomeActivity() {
