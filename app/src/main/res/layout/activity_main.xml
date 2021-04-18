@@ -87,8 +87,7 @@
     <Button
         android:id="@+id/location_button"
         android:layout_width="180dp"
-        android:layout_height="77dp"
-        android:background="#FFFFFF"
+        android:layout_height="87dp"
         android:text="Start Sharing Location"
         app:backgroundTint="#091761"
         app:icon="@android:drawable/ic_dialog_map"

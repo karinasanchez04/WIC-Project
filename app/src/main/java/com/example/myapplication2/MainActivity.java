@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.location_dialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background));
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.location_dialog_background));
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                         sendSMS();
+                        dialog.dismiss();
                     } else {
                         requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1);
                     }
@@ -310,16 +311,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
